@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Header from "../components/Header"
 
 export default function LoginPages(){
 
@@ -37,11 +38,7 @@ export default function LoginPages(){
 
     return(
         <>
-            <header className="jumbotron">
-                <div className="container text-center">
-                    <h1 className="display-4">Installment Cars</h1>
-                </div>
-            </header>
+            <Header title={"Installment Cars"}/>
 
             <div className="container">
                 <div className="row justify-content-center">

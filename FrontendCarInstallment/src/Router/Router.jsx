@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import TemplateUi from "../components/TemplateUi";
 import LoginPages from "../pages/LoginPages";
+import DataValidationPages from "../pages/DataValidationPages";
 
 const Router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const Router = createBrowserRouter([
                 path:'/dashboard',
                 element: "sdfsaf",
             },
+            {
+                path:'/data-validation',
+                element:<DataValidationPages/>
+            }
         ]
     },
     {
