@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Installment;
 use App\Http\Controllers\Controller;
 use App\Models\AvailableMonth;
 use App\Models\Installment;
+use App\Models\InstallmentApplySocieties;
 use Illuminate\Http\Request;
 
 class GetInstallmentController extends Controller
@@ -24,9 +25,20 @@ class GetInstallmentController extends Controller
         
         $installments = Installment::get();
 
-        $installments = $installments->map(function($in){
+        $installments = $installments->map(function($in) use ($user){
 
             $months = AvailableMonth::where('installment_id', $in->id)->get();
+
+            $isApply = InstallmentApplySocieties::where('installment_id', $in->id)->first();
+
+            if($isApply){
+                if($isApply->Society->id == $user->id){
+                    $isApply = 2;    
+                }else{
+                    $isApply = 1;
+                }
+            }
+
 
             return[
                 'id'=>$in->id,
@@ -40,6 +52,7 @@ class GetInstallmentController extends Controller
                         'description'=>$mon->description
                     ];
                 }),
+                'is_apply'=>$isApply
             ];
         });
 
@@ -78,7 +91,8 @@ class GetInstallmentController extends Controller
             'available_month'=>$months->map(function($mon){
                 return [
                     'month'=>$mon->month,
-                    'description'=>$mon->description
+                    'description'=>$mon->description,
+                    'nominal'=>$mon->nominal
                 ];
             }),
         ];
