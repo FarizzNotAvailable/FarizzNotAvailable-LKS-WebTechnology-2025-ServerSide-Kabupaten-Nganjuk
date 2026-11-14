@@ -28,3 +28,9 @@ ALTER TABLE `validations` ADD `updated_at` VARCHAR(512) NULL AFTER `validator_no
 ALTER TABLE `validations` ADD `created_at` VARCHAR(512) NULL AFTER `validator_notes`;
 
 php artisan make:controller Validations/GetValidationController
+
+php artisan make:model Brand
+
+php artisan make:model Installment
+
+php artisan make:model AvailableMonth
