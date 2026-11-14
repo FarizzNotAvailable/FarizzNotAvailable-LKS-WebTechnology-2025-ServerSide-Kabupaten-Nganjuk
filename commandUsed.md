@@ -34,3 +34,15 @@ php artisan make:model Brand
 php artisan make:model Installment
 
 php artisan make:model AvailableMonth
+
+php artisan make:model InstallmentApplySocieties // Lupa naruh yang ini di commit sebelumnya jir
+
+php artisan make:model InstallmentApplyStatus // Lupa naruh yang ini di commit sebelumnya jir
+
+php artisan make:controller Installment/PostInstallmentController.php
+
+ALTER TABLE `installment_apply_societies` ADD `updated_at` VARCHAR(512) NULL;
+ALTER TABLE `installment_apply_societies` ADD `created_at` VARCHAR(512) NULL;
+
+ALTER TABLE `installment_apply_statuses` ADD `updated_at` VARCHAR(512) NULL;
+ALTER TABLE `installment_apply_statuses` ADD `created_at` VARCHAR(512) NULL;
