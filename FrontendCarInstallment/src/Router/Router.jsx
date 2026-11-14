@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import TemplateUi from "../components/TemplateUi";
 import LoginPages from "../pages/LoginPages";
 import DataValidationPages from "../pages/DataValidationPages";
+import CarInstallmentPages from "../pages/CarInstallmentPages";
 
 const Router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ const Router = createBrowserRouter([
             {
                 path:'/data-validation',
                 element:<DataValidationPages/>
+            },
+            {
+                path:'/car-installment',
+                element:<CarInstallmentPages/>
             }
         ]
     },
