@@ -4,6 +4,7 @@ import LoginPages from "../pages/LoginPages";
 import DataValidationPages from "../pages/DataValidationPages";
 import CarInstallmentPages from "../pages/CarInstallmentPages";
 import CarInstallmentDetailPages from "../pages/CarInstallmentDetailPages";
+import DashboardPages from "../pages/DashboardPages";
 
 const Router = createBrowserRouter([
     {
@@ -16,7 +17,7 @@ const Router = createBrowserRouter([
             },
             {
                 path:'/dashboard',
-                element: "sdfsaf",
+                element: <DashboardPages/>,
             },
             {
                 path:'/data-validation',
