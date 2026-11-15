@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import TextArea from "../components/TextArea";
 import Button from "../components/Button";
@@ -10,6 +10,8 @@ export default function CarInstallmentDetailPages(){
 
     const {id} = useParams()
 	const url = import.meta.env.VITE_BASE_URL
+
+    const navigateTo = useNavigate()
 
     const [Data,setData] = useState()
     const [Nominal,setNominal] = useState()
@@ -33,8 +35,47 @@ export default function CarInstallmentDetailPages(){
 
     const handleNominal = (e)=>{
         const [a, b] = e.split(" ").map(Number)
-
+        
         setNominal(b/a)
+
+        setMonth(a)
+    }
+
+    const [Month,setMonth] = useState()
+    const [Notes,setNotes] = useState()
+
+    const handleSubmit = ()=>{
+
+        console.log(Month)
+        console.log(Notes)
+
+        axios({
+           method:'post',
+           url:url+"/applications",
+           headers:{
+              'Authorization':'Bearer '+localStorage.getItem('auth0')
+              },
+           data:{
+              'installment_id':id,
+              'month':Month,
+              'notes':Notes 
+              }
+           })
+        .then(response=>{
+           console.log(response)
+
+           alert(response.data.body.message);
+
+           navigateTo('/dashboard')
+        })
+        .catch(error=>{
+            console.log(error)
+           if(error.response.status == 401){
+            
+            alert(error.response.data.body.message);
+            
+           }
+        })
     }
 
     return(
@@ -84,13 +125,13 @@ export default function CarInstallmentDetailPages(){
                             <div className="d-flex align-items-center mb-3">
                                 <label className="mr-3 mb-0">Notes</label>
                             </div>
-                            <TextArea placeholder={"Explain why your installment should be approved"}/>
+                            <TextArea placeholder={"Explain why your installment should be approved"} onchange={(e)=>{setNotes(e.target.value)}}/>
                         </div>
                     </div>
                     <div className="col-md-12">
                         <div className="form-group">
                             <div className="d-flex align-items-center mb-3">
-                                <Button text={'Apply'}/>
+                                <Button text={'Apply'} onclick={()=>{handleSubmit()}}/>
                             </div>
                         </div>
                     </div>
