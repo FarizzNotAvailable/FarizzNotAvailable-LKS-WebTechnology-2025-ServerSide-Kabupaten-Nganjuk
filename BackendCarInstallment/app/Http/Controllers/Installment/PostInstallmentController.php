@@ -118,11 +118,49 @@ class PostInstallmentController extends Controller
         
         return response()->json([
            'header'=>[
-               'response code' => '200'
+               'response code' => 200
             ], 
            'body'=>[
                'installments' => $cars
             ]
         ]);
     }
+
+    function Show(){
+        $user = auth('sanctum')->user();
+        if($user == null){
+           return response()->json([
+               'header'=>[
+                   'response code' => 401
+                ], 
+               'body'=>[
+                   'message' => 'Unauthorized User'
+                ]
+           ], 401);
+        }
+        
+        $installment = InstallmentApplyStatus::where('society_id', $user->id)->first();
+
+        $installment = [
+            'id'=>$installment->id,
+            'date'=>$installment->date,
+            'car'=>$installment->Installment->cars,
+            'price'=>$installment->Installment->price,
+            'description'=>$installment->Installment->description,
+            'notes'=>$installment->InstallmentApplySocieties->notes,
+            'month'=>$installment->AvailableMonth->month,
+            'status'=>$installment->status,
+        ];
+
+        return response()->json([
+           'header'=>[
+               'response code' => 401
+            ], 
+           'body'=>[
+               'installment' => $installment
+            ]
+        ]);
+
+    }
+
 }

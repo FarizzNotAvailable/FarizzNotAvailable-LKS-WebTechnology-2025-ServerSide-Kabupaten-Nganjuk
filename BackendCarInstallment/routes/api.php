@@ -24,5 +24,6 @@ Route::prefix('/v1')->group(function(){
     Route::get('/installment_cars/{id}', [GetInstallmentController::class, 'Show']);
     Route::post('/applications', [PostInstallmentController::class, 'Index']);
     Route::get('/applications', [PostInstallmentController::class, 'Get']);
+    Route::get('/application', [PostInstallmentController::class, 'Show']);
 
 });
