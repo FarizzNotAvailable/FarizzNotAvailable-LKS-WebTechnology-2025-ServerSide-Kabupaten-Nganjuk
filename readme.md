@@ -1,1 +1,1 @@
-  Bukan cara paling optimal maupun cepat, bisa di improve
+  Bukan cara paling optimal maupun cepat, bisa diimprove
